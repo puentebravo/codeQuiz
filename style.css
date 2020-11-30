@@ -1,0 +1,27 @@
+body {
+  background-color: rgb(48, 47, 47);
+  color: white;
+  font-family: Arial, Helvetica, sans-serif;
+  font-size: 16px;
+}
+
+#hallOfFame {
+  float: left;
+}
+
+#timeRemaining {
+  float: right;
+}
+
+.jumbotron {
+  margin-top: 60px;
+  color: black;
+}
+
+a {
+  text-decoration: none;
+}
+
+#hof-center {
+  text-align: center;
+}
