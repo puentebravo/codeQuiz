@@ -26,3 +26,8 @@ a {
 #hof-center {
   text-align: center;
 }
+
+#startBtn {
+  margin-left: auto;
+  margin-right: auto;
+}
