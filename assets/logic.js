@@ -69,7 +69,7 @@ var bonus = {
 var qArray = [question1, question2, question3, question4, question5, bonus];
 console.log(qArray);
 
-var time = 30;
+var time = "";
 var score = 0;
 //var timeElapsed = 0;
 //var timeLeft = time - timeElapsed;
@@ -81,21 +81,23 @@ var interval;
 
 function timeDisplay() {
   timerEl.textContent = "Time Remaining: " + time + " seconds.";
+  if (time <= 0) {
+    clearInterval(interval);
+    console.log("time's up");
+    alert("Time's up! Better luck next time.");
+  }
 }
 
 function gameTimer() {
-  if (time >= 0) {
-    interval = setInterval(function () {
-      time--;
-      timeDisplay();
-    }, 1000);
-  } else {
-    clearInterval(interval);
-    alert("Time's up!");
-  }
+  time = 30;
+  interval = setInterval(function () {
+    time--;
+    timeDisplay();
+  }, 1000);
 }
 //for loop to keep cycling through the array while there's time left
-function startGame() {
+function startGame(event) {
+  event.stopPropagation();
   gameTimer();
   console.log("IS WORKING STILL");
   startBtn.style.display = "none";
@@ -103,5 +105,4 @@ function startGame() {
 //Function to subtract seconds from timer for wrong answers
 
 //Array of objects: each object is a question, with properties for the question itself, its choices, and its answer key
-//startBtn.addEventListener("click", gameTimer());
-startBtn.addEventListener("click", gameTimer());
+startBtn.addEventListener("click", startGame);
