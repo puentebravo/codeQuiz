@@ -55,8 +55,20 @@ var bonus = {
 };
 
 var qArray = [question1, question2, question3, question4, question5, bonus];
-
 console.log(qArray);
+
+var time = 30;
+var score = 0;
+
+var timerEl = document.querySelector("#timeRemaining");
+var questionEl = document.querySelector("#qBlock");
+var choiceEl = document.querySelector("#chBlock");
+var statusEl = document.querySelector("#answerStat");
+var fameList = document.querySelector("#fameList");
+
+//var timeElapsed = 0;
+//var timeLeft = time - timeElapsed;
+
 //Timer function to count down- look back at the tomato timer project, see how that worked.
 
 //While loop to keep cycling through the array while there's time left
