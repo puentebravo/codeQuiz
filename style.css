@@ -13,7 +13,8 @@ body {
   float: right;
 }
 
-.jumbotron {
+.jumbotron,
+.card {
   margin-top: 60px;
   color: black;
 }
