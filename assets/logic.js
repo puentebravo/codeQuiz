@@ -73,6 +73,16 @@ var score = 0;
 var interval;
 var i = 0;
 
+function audioRight() {
+  var yes = new Audio("assets/sounds/correct.wav");
+  yes.play();
+}
+
+function audioWrong() {
+  var no = new Audio("assets/sounds/wrong.wav");
+  no.play();
+}
+
 function timeDisplay() {
   timerEl.textContent = "Time Remaining: " + time + " seconds.";
   if (time <= 0) {
@@ -121,12 +131,14 @@ document.addEventListener("click", function (event) {
     if (event.target.textContent === qArray[i].answer) {
       statusEl.textContent = "Correct!";
       score + qArray[i].value;
+      audioRight();
       console.log("WOOT! WORKING");
       console.log(score);
       nextQuestion();
     } else {
       statusEl.textContent = "Wrong!";
       console.log("WORKING");
+      audioWrong();
       nextQuestion();
     }
   }
