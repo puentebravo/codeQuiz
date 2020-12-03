@@ -71,6 +71,7 @@ console.log(qArray);
 var time = "";
 var score = 0;
 var interval;
+var i = 0;
 
 function timeDisplay() {
   timerEl.textContent = "Time Remaining: " + time + " seconds.";
@@ -89,23 +90,23 @@ function gameTimer() {
   }, 1000);
 }
 
-function nextQuestion() {
-  i = i + 1;
-  return qArray[i].question;
-}
-
-//for loop to keep cycling through the array while there's time left
+//Starts the game, displaying questions and iterating through the object array
 function startGame(event) {
   event.stopPropagation();
   gameTimer();
-  i = 0;
+  i = -1;
   console.log("IS WORKING STILL");
   startBtn.style.display = "none";
   questionEl.textContent = "";
   choiceEl.textContent = "";
-  //set text content of qBlock to question property of object
+  nextQuestion();
+}
+
+function nextQuestion() {
+  questionEl.textContent = "";
+  choiceEl.textContent = "";
+  i++;
   questionEl.textContent = qArray[i].question;
-  console.log(qArray[i].question);
   for (j = 0; j < qArray[i].choices.length; j++) {
     var cLi = document.createElement("li");
     cLi.setAttribute("data-index", i);
@@ -115,16 +116,25 @@ function startGame(event) {
   }
 }
 
+document.addEventListener("click", function (event) {
+  if (event.target.matches(".choiceBtn")) {
+    if (event.target.textContent === qArray[i].answer) {
+      statusEl.textContent = "Correct!";
+      score + qArray[i].value;
+      console.log("WOOT! WORKING");
+      console.log(score);
+      nextQuestion();
+    } else {
+      statusEl.textContent = "Wrong!";
+      console.log("WORKING");
+      nextQuestion();
+    }
+  }
+});
+
 //set text content of chBlock to choices; create unordered list, render as buttons with choice text
 // on click, check choice against object answer property.
 // if the two are the same, display "correct" in answerStat block, move on to next question, and add the value of the object to the score
 // if the two aren't equal, display "Wrong!" in the answerStat block, and deduct 5 seconds from the timer
 
-//
-
 startBtn.addEventListener("click", startGame);
-document.addEventListener("click", function (event) {
-  if (event.target.matches(".choiceBtn")) {
-    console.log("this works");
-  }
-});
