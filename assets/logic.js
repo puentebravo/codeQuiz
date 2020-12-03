@@ -11,7 +11,6 @@ var question1 = {
   question: "What kind of code makes up the backbone of a website?",
   choices: ["The Matrix", "CSS", "HTML", "Javascript"],
   answer: "HTML",
-  value: 5,
 };
 
 console.log(question1);
@@ -20,7 +19,6 @@ var question2 = {
   question: "In CSS, how do you refer to a specific ID?",
   choices: ["#", "by its html element", ".", "{}"],
   answer: "#",
-  value: 5,
 };
 
 console.log(question2);
@@ -33,23 +31,20 @@ var question3 = {
     "call a function within your code",
     "execute a function a certain number of times",
   ],
-  answer: "execute a function until a condition is met",
-  value: 5,
+  answer: "execute a function a certain number of times",
 };
 
 var question4 = {
   question: "An array must be enclosed in which characters?",
   choices: [" '  '", "< >", "( )", "[ ]"],
   answer: "[ ]",
-  value: 5,
 };
 
 var question5 = {
   question:
     "Last one. What language uses $ and a CDN to replace a significant amount of Javascript syntax?",
   choices: ["JSON", "Node.js", "JQuery", "SQL"],
-  answer: "Jquery",
-  value: 5,
+  answer: "JQuery",
 };
 
 var bonus = {
@@ -62,7 +57,6 @@ var bonus = {
     "(Random being flung into the pit noises)",
   ],
   answer: "Roundabouts 24 miles per hour, if it's European.",
-  value: 2,
 };
 
 var qArray = [question1, question2, question3, question4, question5, bonus];
@@ -89,6 +83,7 @@ function timeDisplay() {
     clearInterval(interval);
     console.log("time's up");
     alert("Time's up! Better luck next time.");
+    location.reload();
   }
 }
 
@@ -105,7 +100,6 @@ function startGame(event) {
   event.stopPropagation();
   gameTimer();
   i = -1;
-  console.log("IS WORKING STILL");
   startBtn.style.display = "none";
   questionEl.textContent = "";
   choiceEl.textContent = "";
@@ -130,23 +124,19 @@ document.addEventListener("click", function (event) {
   if (event.target.matches(".choiceBtn")) {
     if (event.target.textContent === qArray[i].answer) {
       statusEl.textContent = "Correct!";
-      score + qArray[i].value;
+      score++;
       audioRight();
       console.log("WOOT! WORKING");
       console.log(score);
       nextQuestion();
     } else {
       statusEl.textContent = "Wrong!";
+      time -= 10;
       console.log("WORKING");
       audioWrong();
       nextQuestion();
     }
   }
 });
-
-//set text content of chBlock to choices; create unordered list, render as buttons with choice text
-// on click, check choice against object answer property.
-// if the two are the same, display "correct" in answerStat block, move on to next question, and add the value of the object to the score
-// if the two aren't equal, display "Wrong!" in the answerStat block, and deduct 5 seconds from the timer
 
 startBtn.addEventListener("click", startGame);
