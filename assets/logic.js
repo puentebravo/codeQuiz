@@ -1,4 +1,3 @@
-console.log("IS WORKING");
 var timerEl = document.querySelector("#timeRemaining");
 var questionEl = document.querySelector("#qBlock");
 var choiceEl = document.querySelector("#chBlock");
@@ -71,13 +70,7 @@ console.log(qArray);
 
 var time = "";
 var score = 0;
-//var timeElapsed = 0;
-//var timeLeft = time - timeElapsed;
 var interval;
-
-//Button event listener to kick off the game
-
-//Timer function to count down- look back at the tomato timer project, see how that worked.
 
 function timeDisplay() {
   timerEl.textContent = "Time Remaining: " + time + " seconds.";
@@ -95,14 +88,43 @@ function gameTimer() {
     timeDisplay();
   }, 1000);
 }
+
+function nextQuestion() {
+  i = i + 1;
+  return qArray[i].question;
+}
+
 //for loop to keep cycling through the array while there's time left
 function startGame(event) {
   event.stopPropagation();
   gameTimer();
+  i = 0;
   console.log("IS WORKING STILL");
   startBtn.style.display = "none";
+  questionEl.textContent = "";
+  choiceEl.textContent = "";
+  //set text content of qBlock to question property of object
+  questionEl.textContent = qArray[i].question;
+  console.log(qArray[i].question);
+  for (j = 0; j < qArray[i].choices.length; j++) {
+    var cLi = document.createElement("li");
+    cLi.setAttribute("data-index", i);
+    cLi.setAttribute("class", "btn btn-dark choiceBtn");
+    choiceEl.appendChild(cLi);
+    cLi.textContent = qArray[i].choices[j];
+  }
 }
-//Function to subtract seconds from timer for wrong answers
 
-//Array of objects: each object is a question, with properties for the question itself, its choices, and its answer key
+//set text content of chBlock to choices; create unordered list, render as buttons with choice text
+// on click, check choice against object answer property.
+// if the two are the same, display "correct" in answerStat block, move on to next question, and add the value of the object to the score
+// if the two aren't equal, display "Wrong!" in the answerStat block, and deduct 5 seconds from the timer
+
+//
+
 startBtn.addEventListener("click", startGame);
+document.addEventListener("click", function (event) {
+  if (event.target.matches(".choiceBtn")) {
+    console.log("this works");
+  }
+});
