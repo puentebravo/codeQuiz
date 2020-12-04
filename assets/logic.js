@@ -158,9 +158,8 @@ document.addEventListener("click", function (event) {
 document.addEventListener("click", function (event) {
   event.stopPropagation();
   if (event.target.matches(".formBtn")) {
-    var hofID = document.querySelector(".hofEntry").value;
+    var hofID = document.querySelector(".hofEntry").value + " - " + score;
     localStorage.setItem("Initials", hofID);
-    localStorage.setItem("score", score);
     window.location.href = "highscore.html";
   }
 });
