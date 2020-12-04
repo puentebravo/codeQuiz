@@ -13,15 +13,11 @@ var question1 = {
   answer: "HTML",
 };
 
-console.log(question1);
-
 var question2 = {
   question: "In CSS, how do you refer to a specific ID?",
   choices: ["#", "by its html element", ".", "{}"],
   answer: "#",
 };
-
-console.log(question2);
 
 var question3 = {
   question: "In Javascript, a For Loop is used to:",
@@ -60,7 +56,6 @@ var bonus = {
 };
 
 var qArray = [question1, question2, question3, question4, question5, bonus];
-console.log(qArray);
 
 var time = "";
 var score = 0;
@@ -68,18 +63,24 @@ var interval;
 var cQuestion = 0;
 var lastQuestionIndex = qArray.length - 1;
 
-//function scoreSubmit() {
-// console.log("It's over!");
-//   var hofForm = document.createElement("div");
-//   var hofInput = document.createElement("input");
-//   var submitBtn = document.createElement("button");
-//   hofForm.setAttribute("class", "form-group");
-//   hofInput.setAttribute("class", "form-control");
-// }
-
-//function gameOver {
-
-//}
+function gameOver() {
+  clearInterval(interval);
+  statusEl.style;
+  questionEl.textContent = "";
+  choiceEl.textContent = "";
+  statusEl.textContent = "";
+  var hofForm = document.createElement("div");
+  var hofInput = document.createElement("input");
+  var submitBtn = document.createElement("button");
+  hofForm.setAttribute("class", "form-group");
+  hofInput.setAttribute("class", "form-control");
+  submitBtn.setAttribute("class", "btn btn-dark formBtn");
+  questionEl.textContent = "You earned " + score + " points out of 5.";
+  questionEl.appendChild(hofForm);
+  choiceEl.appendChild(hofInput);
+  submitBtn.textContent = "Submit";
+  choiceEl.appendChild(submitBtn);
+}
 
 function audioRight() {
   var yes = new Audio("assets/sounds/correct.wav");
@@ -95,9 +96,8 @@ function timeDisplay() {
   timerEl.textContent = "Time Remaining: " + time + " seconds.";
   if (time <= 0) {
     clearInterval(interval);
-    console.log("time's up");
     alert("Time's up! Better luck next time.");
-    location.reload();
+    gameOver();
   }
 }
 
@@ -124,13 +124,17 @@ function nextQuestion() {
   questionEl.textContent = "";
   choiceEl.textContent = "";
   cQuestion++;
-  questionEl.textContent = qArray[cQuestion].question;
-  for (j = 0; j < qArray[cQuestion].choices.length; j++) {
-    var cLi = document.createElement("li");
-    cLi.setAttribute("data-index", cQuestion);
-    cLi.setAttribute("class", "btn btn-dark choiceBtn");
-    choiceEl.appendChild(cLi);
-    cLi.textContent = qArray[cQuestion].choices[j];
+  if (cQuestion <= lastQuestionIndex) {
+    questionEl.textContent = qArray[cQuestion].question;
+    for (j = 0; j < qArray[cQuestion].choices.length; j++) {
+      var cLi = document.createElement("li");
+      cLi.setAttribute("data-index", cQuestion);
+      cLi.setAttribute("class", "btn btn-dark choiceBtn");
+      choiceEl.appendChild(cLi);
+      cLi.textContent = qArray[cQuestion].choices[j];
+    }
+  } else {
+    gameOver();
   }
 }
 
@@ -140,16 +144,19 @@ document.addEventListener("click", function (event) {
       statusEl.textContent = "Correct!";
       score++;
       audioRight();
-      console.log("WOOT! WORKING");
       console.log(score);
       nextQuestion();
     } else {
       statusEl.textContent = "Wrong!";
       time -= 10;
-      console.log("WORKING");
       audioWrong();
       nextQuestion();
     }
+  }
+});
+
+document.addEventListener("click", function (event) {
+  if (event.target.matches(".formBtn")) {
   }
 });
 
