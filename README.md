@@ -20,7 +20,7 @@ An interactive, dynamic, fun way for programming students to test their knowledg
 
 ## Link to Deployed Site:
 
-![Deployed Site](https://puentebravo.github.io/codeQuiz/)
+[Deployed App](https://puentebravo.github.io/codeQuiz/)
 
 ## Credits:
 
