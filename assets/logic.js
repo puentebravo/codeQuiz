@@ -56,6 +56,7 @@ var bonus = {
 };
 
 var qArray = [question1, question2, question3, question4, question5, bonus];
+var hScores = [];
 
 var time = "";
 var score = 0;
@@ -109,6 +110,13 @@ function gameTimer() {
   }, 1000);
 }
 
+function getScores() {
+  var update = JSON.parse(localStorage.getItem("highScore"));
+  if (update !== null) {
+    hScores = update;
+  }
+}
+
 //Starts the game, displaying questions and iterating through the object array
 function startGame(event) {
   event.stopPropagation();
@@ -144,7 +152,6 @@ document.addEventListener("click", function (event) {
       statusEl.textContent = "Correct!";
       score++;
       audioRight();
-      console.log(score);
       nextQuestion();
     } else {
       statusEl.textContent = "Wrong!";
@@ -159,7 +166,9 @@ document.addEventListener("click", function (event) {
   event.stopPropagation();
   if (event.target.matches(".formBtn")) {
     var hofID = document.querySelector(".hofEntry").value + " - " + score;
-    localStorage.setItem("Initials", hofID);
+    getScores();
+    hScores.push(hofID);
+    localStorage.setItem("highScore", JSON.stringify(hScores));
     window.location.href = "highscore.html";
   }
 });
