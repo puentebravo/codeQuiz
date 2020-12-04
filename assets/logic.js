@@ -65,7 +65,21 @@ console.log(qArray);
 var time = "";
 var score = 0;
 var interval;
-var i = 0;
+var cQuestion = 0;
+var lastQuestionIndex = qArray.length - 1;
+
+//function scoreSubmit() {
+// console.log("It's over!");
+//   var hofForm = document.createElement("div");
+//   var hofInput = document.createElement("input");
+//   var submitBtn = document.createElement("button");
+//   hofForm.setAttribute("class", "form-group");
+//   hofInput.setAttribute("class", "form-control");
+// }
+
+//function gameOver {
+
+//}
 
 function audioRight() {
   var yes = new Audio("assets/sounds/correct.wav");
@@ -99,7 +113,7 @@ function gameTimer() {
 function startGame(event) {
   event.stopPropagation();
   gameTimer();
-  i = -1;
+  cQuestion = -1;
   startBtn.style.display = "none";
   questionEl.textContent = "";
   choiceEl.textContent = "";
@@ -109,20 +123,20 @@ function startGame(event) {
 function nextQuestion() {
   questionEl.textContent = "";
   choiceEl.textContent = "";
-  i++;
-  questionEl.textContent = qArray[i].question;
-  for (j = 0; j < qArray[i].choices.length; j++) {
+  cQuestion++;
+  questionEl.textContent = qArray[cQuestion].question;
+  for (j = 0; j < qArray[cQuestion].choices.length; j++) {
     var cLi = document.createElement("li");
-    cLi.setAttribute("data-index", i);
+    cLi.setAttribute("data-index", cQuestion);
     cLi.setAttribute("class", "btn btn-dark choiceBtn");
     choiceEl.appendChild(cLi);
-    cLi.textContent = qArray[i].choices[j];
+    cLi.textContent = qArray[cQuestion].choices[j];
   }
 }
 
 document.addEventListener("click", function (event) {
   if (event.target.matches(".choiceBtn")) {
-    if (event.target.textContent === qArray[i].answer) {
+    if (event.target.textContent === qArray[cQuestion].answer) {
       statusEl.textContent = "Correct!";
       score++;
       audioRight();
