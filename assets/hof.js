@@ -3,6 +3,8 @@ var clrBtn = document.querySelector("#clrHall");
 
 var highScore = [];
 
+//Gets scores on page load
+
 function getScores() {
   var newData = JSON.parse(localStorage.getItem("highScore"));
   if (newData !== null) {
@@ -11,6 +13,8 @@ function getScores() {
     renderScore();
   }
 }
+
+//...then renders scores on the board.
 
 function renderScore() {
   for (i = 0; i < highScore.length; i++) {

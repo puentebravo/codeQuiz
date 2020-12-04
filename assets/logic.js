@@ -64,6 +64,8 @@ var interval;
 var cQuestion = 0;
 var lastQuestionIndex = qArray.length - 1;
 
+//End-game splash screen, displayed whenever time runs out or the quiz is finished
+
 function gameOver() {
   clearInterval(interval);
   statusEl.style;
@@ -127,7 +129,7 @@ function startGame(event) {
   choiceEl.textContent = "";
   nextQuestion();
 }
-
+//Advances to next question in the array; initiates end screen once the array is finished
 function nextQuestion() {
   questionEl.textContent = "";
   choiceEl.textContent = "";
@@ -146,6 +148,8 @@ function nextQuestion() {
   }
 }
 
+//Checks answer against key; if correct, adds score. If wrong, subtracts time
+
 document.addEventListener("click", function (event) {
   if (event.target.matches(".choiceBtn")) {
     if (event.target.textContent === qArray[cQuestion].answer) {
@@ -161,6 +165,8 @@ document.addEventListener("click", function (event) {
     }
   }
 });
+
+//Submits entry into the hall of fame.
 
 document.addEventListener("click", function (event) {
   event.stopPropagation();
