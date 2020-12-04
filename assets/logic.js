@@ -73,7 +73,7 @@ function gameOver() {
   var hofInput = document.createElement("input");
   var submitBtn = document.createElement("button");
   hofForm.setAttribute("class", "form-group");
-  hofInput.setAttribute("class", "form-control");
+  hofInput.setAttribute("class", "form-control hofEntry");
   submitBtn.setAttribute("class", "btn btn-dark formBtn");
   questionEl.textContent = "You earned " + score + " points out of 5.";
   questionEl.appendChild(hofForm);
@@ -156,7 +156,12 @@ document.addEventListener("click", function (event) {
 });
 
 document.addEventListener("click", function (event) {
+  event.stopPropagation();
   if (event.target.matches(".formBtn")) {
+    var hofID = document.querySelector(".hofEntry").value;
+    localStorage.setItem("Initials", hofID);
+    localStorage.setItem("score", score);
+    window.location.href = "highscore.html";
   }
 });
 
